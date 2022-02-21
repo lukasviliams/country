@@ -1,11 +1,11 @@
 /* Variables */
 :root {
-    --dark-blue: hsl(209, 23%, 22%);
-    --dark-mode-back: hsl(207, 26%, 17%);
-    --light-mode-text: hsl(200, 15%, 8%);
-    --light-mode-input: hsl(0, 0%, 52%);
-    --light-mode-back: hsl(0, 0%, 98%);
-    --white: hsl(0, 0%, 100%);
+    --dark-blue: rgba(43, 57, 69, 1);
+    --dark-mode-back: rgba(32, 44, 55, 1);
+    --light-mode-text: rgba(17, 21, 23, 1);
+    --light-mode-input: rgba(133, 133, 133, 1);
+    --light-mode-back: rgba(250, 250, 250, 1);
+    --white: rgba(255, 255, 255, 1);
 }
 /* Global reset */
 html {

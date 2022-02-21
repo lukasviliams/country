@@ -1,18 +1,24 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <Spinner v-if="isLoading" />
   </div>
 </template>
 
 <script>
+import { onBeforeMount } from "@vue/runtime-core";
 // @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
-
+import getDocuments from "../composables/getDocuments";
+import Spinner from "../components/Spinner.vue";
 export default {
   name: "Home",
-  components: {
-    HelloWorld,
+  components: { Spinner },
+  setup() {
+    const { isLoading, data, error, load } = getDocuments();
+    onBeforeMount(() => {
+      load();
+    });
+    return { isLoading, data, error };
   },
 };
 </script>
