@@ -27,3 +27,8 @@ html {
 }
 /* Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap');
+.body_text-semi {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+}
