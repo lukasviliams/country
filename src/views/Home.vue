@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
     <Spinner v-if="isLoading" />
+    <Inputs />
   </div>
 </template>
 
@@ -10,9 +10,10 @@ import { onBeforeMount } from "@vue/runtime-core";
 // @ is an alias to /src
 import getDocuments from "../composables/getDocuments";
 import Spinner from "../components/Spinner.vue";
+import Inputs from "../components/Inputs.vue";
 export default {
   name: "Home",
-  components: { Spinner },
+  components: { Spinner, Inputs },
   setup() {
     const { isLoading, data, error, load } = getDocuments();
     onBeforeMount(() => {
@@ -22,3 +23,9 @@ export default {
   },
 };
 </script>
+<style scoped>
+.home {
+  padding-left: 5rem;
+  padding-right: 5rem;
+}
+</style>
