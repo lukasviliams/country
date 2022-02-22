@@ -1,7 +1,9 @@
 <template>
   <div id="nav">
     <div class="navigation">
-      <router-link to="/">Where in the World</router-link>
+      <div class="router-header">
+        <router-link to="/">Where in the World</router-link>
+      </div>
       <div class="svg_container">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -28,10 +30,6 @@
 </template>
 
 <style>
-#app {
-  padding-left: 5rem;
-  padding-right: 5rem;
-}
 .navigation {
   height: 8rem;
   display: flex;
@@ -58,5 +56,11 @@
   font-weight: 800;
   color: var(--dark-blue);
   text-decoration: none;
+}
+.router-header {
+  padding-left: 5vw;
+}
+.svg_container {
+  padding-right: 5vw;
 }
 </style>

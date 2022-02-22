@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    <Spinner v-if="isLoading" />
     <Inputs />
+    <Spinner v-if="isLoading" />
   </div>
 </template>
 
@@ -25,7 +25,7 @@ export default {
 </script>
 <style scoped>
 .home {
-  padding-left: 5rem;
-  padding-right: 5rem;
+  padding-left: 5vw;
+  padding-right: 5vw;
 }
 </style>
