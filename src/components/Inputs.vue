@@ -45,7 +45,7 @@
       </svg>
     </div>
     <form class="select_container">
-      <select id="filter" name="filter">
+      <select id="filter" class="element_select" name="filter">
         <option value="">Filter by Region</option>
         <option value="Africa">Africa</option>
         <option value="America">America</option>
@@ -57,21 +57,8 @@
 </template>
 
 <script>
-import { onMounted, ref } from "@vue/runtime-core";
 export default {
   name: "Inputs",
-  setup() {
-    const search = ref();
-    onMounted(() => {
-      search.value = document.getElementById("svgSearch");
-    });
-
-    const handleSearch = () => {
-      search.value.style.visibility = "hidden";
-    };
-
-    return { search, handleSearch };
-  },
 };
 </script>
 
@@ -130,6 +117,28 @@ input:focus::placeholder {
   top: 30%;
   left: 0;
 }
+.select_container {
+  width: 20rem;
+  height: 5.6rem;
+}
+.element_select {
+  height: 100%;
+  width: 100%;
+}
+select {
+  outline: none;
+  border: none;
+  background-color: var(--white);
+  padding-left: 2rem;
+  color: var(--dark-blue);
+  z-index: 1;
+  font-size: 1.4rem;
+}
+select option {
+  color: var(--light-mode-input);
+  background-color: var(--white);
+}
+
 /* Animations */
 @keyframes move {
   0% {
