@@ -1,5 +1,5 @@
 <template>
-  <div class="inputs_container">
+  <section class="inputs_container">
     <div class="input_container">
       <input
         id="searchField"
@@ -53,7 +53,7 @@
         <option value="Asia">Asia</option>
       </select>
     </form>
-  </div>
+  </section>
 </template>
 
 <script>
