@@ -8,15 +8,21 @@
         <h1 class="card_country-detail">{{ doc.name.common }}</h1>
         <p class="card_population-header">
           Population:
-          <span class="card_population-number">{{ doc.population }} </span>
+          <span class="card_population-number"
+            >{{ new Intl.NumberFormat().format(doc.population) }}
+          </span>
         </p>
         <p class="card_region-header">
           Region:
           <span class="card_region-detail">{{ doc.region }}</span>
         </p>
-        <p class="card_capital-header">
+        <p
+          v-for="capital in doc.capital"
+          :key="capital"
+          class="card_capital-header"
+        >
           Capital:
-          <span class="card_capital-detail">{{ doc.capital }}</span>
+          <span class="card_capital-detail">{{ capital }}</span>
         </p>
       </div>
     </article>
@@ -53,7 +59,9 @@ export default {
   gap: 6%;
 
   height: 33.6rem;
-  background-color: var(--dark-blue);
+  width: 27rem;
+  background-color: var(--white);
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
 }
 .card_wrapper-details {
   display: flex;
@@ -61,6 +69,14 @@ export default {
   justify-content: flex-start;
   align-items: flex-start;
   padding-left: 10%;
+}
+.img_container {
+  max-width: 100%;
+  min-width: 100%;
+}
+img {
+  width: 100%;
+  height: 100%;
 }
 .card_country-detail {
   font-size: 1.8rem;
@@ -72,5 +88,10 @@ export default {
 .card_capital-header {
   font-size: 1.4rem;
   font-weight: 600;
+}
+.card_population-header span,
+.card_region-header span,
+.card_capital-header span {
+  font-weight: 300;
 }
 </style>
