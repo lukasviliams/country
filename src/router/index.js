@@ -1,10 +1,22 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
+import CountryDetail from "../views/CountryDetail.vue";
 
 const routes = [
   {
     path: "/",
     name: "Home",
+    component: Home,
+  },
+  {
+    path: "/countrydetail/:id",
+    name: "CountryDetail",
+    component: CountryDetail,
+    props: true,
+  },
+  {
+    path: "/:catchall(.*)",
+    name: Home,
     component: Home,
   },
 ];

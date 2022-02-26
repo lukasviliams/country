@@ -1,6 +1,11 @@
 <template>
   <section class="cards_container">
-    <article v-for="doc in documents" :key="doc.area" class="card_container">
+    <router-link
+      v-for="doc in documents"
+      :key="doc.area"
+      :to="{ name: 'CountryDetail', params: { id: doc.name.common } }"
+      class="card_container"
+    >
       <div class="image_container">
         <img :src="doc.flags.png" alt="Country flag" />
       </div>
@@ -25,7 +30,7 @@
           <span class="card_capital-detail">{{ capital }}</span>
         </p>
       </div>
-    </article>
+    </router-link>
   </section>
 </template>
 
@@ -43,7 +48,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .cards_container {
   display: flex;
   justify-content: center;
@@ -61,7 +66,7 @@ export default {
   height: 33.6rem;
   width: 27rem;
   background-color: var(--white);
-  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
 }
 .card_wrapper-details {
   display: flex;
