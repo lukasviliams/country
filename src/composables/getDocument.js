@@ -4,7 +4,8 @@ const getDocument = () => {
   const data = ref(null);
   const error = ref(null);
   const isLoading = false;
-  const name = ref("Cuba");
+  const name = ref("");
+  const currencies = ref(null);
 
   const load = async function () {
     // isLoading.value = true;
@@ -16,8 +17,9 @@ const getDocument = () => {
         }
       );
       data.value = await response.json();
-      console.log(name.value);
-      console.log(data.value);
+      data.value.forEach((country) => {
+        currencies.value = Object.keys(country.currencies);
+      });
     } catch (err) {
       error.value = err.message;
     }
@@ -28,6 +30,7 @@ const getDocument = () => {
     error,
     isLoading,
     name,
+    currencies,
     load,
   };
 };

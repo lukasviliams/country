@@ -62,6 +62,8 @@ export default {
   justify-content: flex-start;
   align-items: flex-start;
   gap: 6%;
+  text-decoration: none;
+  color: var(--dark-blue);
 
   height: 33.6rem;
   width: 27rem;

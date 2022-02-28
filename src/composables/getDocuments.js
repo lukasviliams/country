@@ -12,7 +12,6 @@ const getDocuments = () => {
         method: "GET",
       });
       data.value = await response.json();
-      console.log(data.value[0]);
     } catch (err) {
       err.message = error.value;
       console.log(error.value);

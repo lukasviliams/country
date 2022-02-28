@@ -50,7 +50,8 @@
   color: #2c3e50;
 } */
 
-#nav a.router-link-exact-active {
+#nav a.router-link-exact-active,
+#nav a {
   font-family: "Nunito", sans-serif;
   font-size: 2.4rem;
   font-weight: 800;
