@@ -1,13 +1,13 @@
 <template>
   <div class="home">
-    <Inputs />
+    <Inputs v-model="searchBar" />
     <Spinner v-if="isLoading" />
-    <Cards :documents="data" />
+    <Cards :documents="data" :matching-country="matchingCountry" />
   </div>
 </template>
 
 <script>
-import { onBeforeMount, ref } from "@vue/runtime-core";
+import { computed, onBeforeMount, ref } from "@vue/runtime-core";
 // @ is an alias to /src
 import getDocuments from "../composables/getDocuments";
 import Spinner from "../components/Spinner.vue";
@@ -17,38 +17,26 @@ export default {
   name: "Home",
   components: { Spinner, Inputs, Cards },
   setup() {
-    const image = ref();
-    const country = ref();
-    const population = ref();
-    const region = ref();
-    const capital = ref();
-    const nativeName = ref();
-    const subRegion = ref();
-    const topLevelDom = ref();
-    const currencies = ref();
-    const languages = ref();
-    const borderCountries = ref();
+    const searchBar = ref("");
 
     const { isLoading, data, error, load } = getDocuments();
     onBeforeMount(() => {
       load();
     });
 
+    const matchingCountry = computed(() => {
+      if (!data.value) return;
+      return data.value.filter((country) =>
+        country.name.common.toLowerCase().includes(searchBar.value)
+      );
+    });
+
     return {
       isLoading,
       data,
       error,
-      image,
-      country,
-      population,
-      region,
-      capital,
-      nativeName,
-      subRegion,
-      topLevelDom,
-      currencies,
-      languages,
-      borderCountries,
+      searchBar,
+      matchingCountry,
     };
   },
 };

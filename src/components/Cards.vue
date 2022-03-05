@@ -1,7 +1,7 @@
 <template>
   <section class="cards_container">
     <router-link
-      v-for="doc in documents"
+      v-for="doc in matchingCountry"
       :key="doc.area"
       :to="{ name: 'CountryDetail', params: { id: doc.name.common } }"
       class="card_container"
@@ -39,6 +39,12 @@ export default {
   name: "Cards",
   props: {
     documents: {
+      type: Object,
+      default: function () {
+        return {};
+      },
+    },
+    matchingCountry: {
       type: Object,
       default: function () {
         return {};

@@ -3,10 +3,12 @@
     <div class="input_container">
       <input
         id="searchField"
+        v-model="searchBar"
         class="input-search"
         type="search"
         name="searchField"
         placeholder="Search for a country..."
+        @input="$emit('update:modelValue', $event.target.value)"
       />
       <label class="searchfield" for="searchField"
         >Search for a country...</label
@@ -57,8 +59,14 @@
 </template>
 
 <script>
+import { ref } from "@vue/reactivity";
 export default {
   name: "Inputs",
+  setup() {
+    const searchBar = ref();
+
+    return { searchBar };
+  },
 };
 </script>
 
