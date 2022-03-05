@@ -1,5 +1,5 @@
 <template>
-  <div class="card_detail-container">
+  <section class="card_detail-container">
     <router-link class="svg_container" :to="{ name: 'Home' }">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -31,77 +31,90 @@
       </svg>
       <p class="svg-route">Back</p>
     </router-link>
-    <div v-for="doc in data" :key="doc.area" class="card_container">
+    <Spinner v-if="isLoading" />
+    <article v-for="doc in data" :key="doc.area" class="card_container">
       <div class="card_container-image">
-        <img class="card_image" :src="doc.flags.png" alt="Country flag" />
+        <img class="card_image" :src="doc.flags.svg" alt="Country flag" />
       </div>
       <div class="card_container-details">
-        <div class="card_container-details-left">
-          <h1 class="card_country-detail">{{ doc.name.common }}</h1>
-          <p class="card_native-header">
-            Native Name:
-            <span class="card_population-number">{{ doc.name.official }} </span>
-          </p>
-          <p class="card_population-header">
-            Population:
-            <span class="card_population-number"
-              >{{ new Intl.NumberFormat().format(doc.population) }}
-            </span>
-          </p>
-          <p class="card_region-header">
-            Region:
-            <span class="card_population-number">{{ doc.region }} </span>
-          </p>
-          <p class="card_subregion-header">
-            Sub Region:
-            <span class="card_population-number">{{ doc.subregion }} </span>
-          </p>
-          <p
-            v-for="capital in doc.capital"
-            :key="capital"
-            class="card_capital-header"
-          >
-            Capital:
-            <span class="card_population-number">{{ capital }} </span>
-          </p>
-          <div class="card_borders_container">
-            <p class="card_borders_container-header">Border Countries:</p>
-            <p
-              v-for="border in doc.borders"
-              :key="border"
-              class="card_borders_container-detail"
-            >
-              {{ border }}
-            </p>
+        <p class="card_header">{{ doc.name.common }}</p>
+        <div class="card_container-details-info">
+          <div class="card_container-details-info-left">
+            <div class="native_name">
+              <p class="native_name-header">Native Name:</p>
+              <p class="native_name-info">
+                {{ nativeName }}
+              </p>
+            </div>
+            <div class="population">
+              <p class="population-header">Population:</p>
+              <p class="population-info">
+                {{ new Intl.NumberFormat().format(doc.population) }}
+              </p>
+            </div>
+            <div class="region">
+              <p class="region-header">Region:</p>
+              <p class="region-info">
+                {{ doc.continents[0] }}
+              </p>
+            </div>
+            <div class="subregion">
+              <p class="subregion-header">Sub region:</p>
+              <p class="subregion-info">
+                {{ doc.subregion }}
+              </p>
+            </div>
+            <div class="capital">
+              <p class="capital-header">Capital:</p>
+              <p class="capital-info">
+                {{ doc.capital[0] }}
+              </p>
+            </div>
+          </div>
+          <div class="card_container-details-info-right">
+            <div class="domain">
+              <p class="domain-header">Top Level Domain:</p>
+              <p class="domain-info">{{ doc.tld[0] }}</p>
+            </div>
+            <div class="currencies">
+              <p class="currencies-header">Currencies:</p>
+              <p
+                v-for="cur in doc.currencies"
+                :key="cur"
+                class="currencies-info"
+              >
+                {{ cur.name }}
+              </p>
+            </div>
+            <div class="languages">
+              <p class="languages-header">Languages:</p>
+              <p
+                v-for="languages in doc.languages"
+                :key="languages"
+                class="languages-info"
+              >
+                {{ languages }}
+              </p>
+            </div>
           </div>
         </div>
-        <div class="card_container-details-right">
-          <p v-for="tld in doc.tld" :key="tld" class="card_subregion-header">
-            Top Level Domain:
-            <span class="card_population-number">{{ tld }} </span>
-          </p>
-          <p class="card_subregion-header">
-            Currencies:
-            <span class="card_population-number">{{ currencies[0] }} </span>
-          </p>
-          <p
-            v-for="languages in doc.languages"
-            :key="languages"
-            class="card_languages-header"
-          >
-            Languages:
-            <span class="card_population-number">{{ languages }} </span>
+        <div class="card_container_details-borders">
+          <p class="borders-header">Border Countries:</p>
+          <p v-for="border in doc.borders" :key="border" class="border">
+            {{ border }}
           </p>
         </div>
       </div>
-    </div>
-  </div>
+    </article>
+  </section>
 </template>
 
 <script>
 import { onMounted } from "@vue/runtime-core";
 import getDocument from "../composables/getDocument";
+import Spinner from "./Spinner.vue";
 export default {
+  components: { Spinner },
   props: {
     id: {
       type: String,
@@ -109,18 +122,19 @@ export default {
     },
   },
   setup(props) {
-    const { data, error, isLoading, name, currencies, load } = getDocument();
+    const { data, error, isLoading, name, currencies, nativeName, load } =
+      getDocument();
     onMounted(() => {
       name.value = props.id;
       load();
     });
-
     return {
       data,
       error,
       isLoading,
       name,
       currencies,
+      nativeName,
       load,
     };
   },
@@ -128,16 +142,14 @@ export default {
 </script>
 <style scoped>
 .card_detail-container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  padding: 0 5vw;
 }
-.card_container {
-  margin-top: 5vh;
-  width: 100%;
+.svg_container {
+  margin-top: 4rem;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   align-items: center;
+  height: 2rem;
 }
 .svg-route {
   font-family: "Nunito", sans-serif;
@@ -145,59 +157,86 @@ export default {
   font-weight: 300;
   line-height: 2rem;
 }
+.card_container {
+  min-height: calc(100vh - 14rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .card_container-image {
+  height: 40em;
+  margin-right: 10em;
+}
+img {
+  height: 100%;
+  width: auto;
+  max-width: 56em;
+}
+.card_container-details {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
+  width: 80em;
 }
-.card_image,
-.card_container-details {
-  margin-top: 5vh;
+.card_container-details-info {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 10em;
+  width: 80em;
 }
-.card_image {
-  height: 20rem;
-  width: auto;
+.native_name,
+.population,
+.region,
+.subregion,
+.capital,
+.domain,
+.currencies,
+.languages,
+.card_container_details-borders {
+  display: flex;
 }
-.card_country-detail {
+.card_header {
+  font-size: 3.2rem;
+  font-weight: 800;
   margin-bottom: 3rem;
 }
-.card_borders {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.card_container-details-info {
+  margin-bottom: 3rem;
 }
-.card_borders_container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.card_native-header,
-.card_population-header,
-.card_region-header,
-.card_subregion-header,
-.card_capital-header,
-.card_borders_container-header,
-.card_languages-header {
-  font-size: 1.4rem;
+.native_name-header,
+.population-header,
+.region-header,
+.subregion-header,
+.capital-header,
+.domain-header,
+.currencies-header,
+.languages-header,
+.borders-header {
+  font-size: 1.6rem;
   font-weight: 600;
+  line-height: 3.2rem;
+  margin-right: 1em;
 }
-span {
+.native_name-info,
+.population-info,
+.region-info,
+.subregion-info,
+.capital-info,
+.domain-info,
+.currencies-info,
+.languages-info,
+.border {
+  font-size: 1.6rem;
   font-weight: 300;
-  margin-left: 1rem;
+  line-height: 3.2rem;
 }
-.card_borders_container-header {
-  margin-right: 1rem;
-}
-.card_borders_container-detail {
-  margin-right: 1rem;
-  font-size: 1.4rem;
-  font-weight: 300;
-  padding: 0.5rem 2rem;
-  box-shadow: 0px 0px 1px var(--light-mode-input);
-  background-color: var(--light-mode-back);
+.border {
+  padding: 0 2em;
+  border-radius: 3px;
+  background-color: var(--white);
+  box-shadow: 0px 0px 5px 0px rgb(207, 207, 207);
+  margin-right: 1em;
 }
 </style>

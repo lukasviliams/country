@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <Inputs />
-    <Spinner v-if="isLoading" />\
+    <Spinner v-if="isLoading" />
     <Cards :documents="data" />
   </div>
 </template>
