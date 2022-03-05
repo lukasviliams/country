@@ -49,10 +49,9 @@
     <form class="select_container">
       <select id="filter" class="element_select" name="filter">
         <option value="">Filter by Region</option>
-        <option value="Africa">Africa</option>
-        <option value="America">America</option>
-        <option value="Europe">Europe</option>
-        <option value="Asia">Asia</option>
+        <option v-for="option in filteredRegion" :key="option" value="Africa">
+          {{ option }}
+        </option>
       </select>
     </form>
   </section>
@@ -62,6 +61,12 @@
 import { ref } from "@vue/reactivity";
 export default {
   name: "Inputs",
+  props: {
+    filteredRegion: {
+      type: Array,
+      default: () => [],
+    },
+  },
   setup() {
     const searchBar = ref();
 

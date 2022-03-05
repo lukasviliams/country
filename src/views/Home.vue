@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <Inputs v-model="searchBar" />
+    <Inputs v-model="searchBar" :filtered-region="filteredRegion" />
     <Spinner v-if="isLoading" />
     <Cards :documents="data" :matching-country="matchingCountry" />
   </div>
@@ -18,12 +18,14 @@ export default {
   components: { Spinner, Inputs, Cards },
   setup() {
     const searchBar = ref("");
+    const { isLoading, data, error, filteredRegion, load } = getDocuments();
 
-    const { isLoading, data, error, load } = getDocuments();
+    // Load data before mounted
     onBeforeMount(() => {
       load();
     });
 
+    // Filter data from data.value comming from composables/getdocuments. Data are filter from $emitinput searBar reference
     const matchingCountry = computed(() => {
       if (!data.value) return;
       return data.value.filter((country) =>
@@ -35,6 +37,7 @@ export default {
       isLoading,
       data,
       error,
+      filteredRegion,
       searchBar,
       matchingCountry,
     };
