@@ -8,7 +8,7 @@
         type="search"
         name="searchField"
         placeholder="Search for a country..."
-        @input="$emit('update:modelValue', $event.target.value)"
+        @input="$emit('update:searchBar', $event.target.value)"
       />
       <label class="searchfield" for="searchField"
         >Search for a country...</label
@@ -47,9 +47,15 @@
       </svg>
     </div>
     <form class="select_container">
-      <select id="filter" class="element_select" name="filter">
+      <select
+        id="filter"
+        v-model="selected"
+        class="element_select"
+        name="filter"
+        @input="$emit('update:selected', $event.target.value)"
+      >
         <option value="">Filter by Region</option>
-        <option v-for="option in filteredRegion" :key="option" value="Africa">
+        <option v-for="option in filteredRegion" :key="option">
           {{ option }}
         </option>
       </select>
@@ -69,8 +75,9 @@ export default {
   },
   setup() {
     const searchBar = ref();
+    const selected = ref("");
 
-    return { searchBar };
+    return { searchBar, selected };
   },
 };
 </script>
