@@ -142,6 +142,7 @@ export default {
 </script>
 <style scoped>
 .card_detail-container {
+  width: 100%;
   padding: 0 5vw;
 }
 .svg_container {
@@ -160,7 +161,7 @@ export default {
 .card_container {
   min-height: calc(100vh - 14rem);
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 }
 .card_container-image {
@@ -168,7 +169,7 @@ export default {
   margin-right: 10em;
 }
 img {
-  height: 100%;
+  height: auto;
   width: auto;
   max-width: 56em;
 }
@@ -232,11 +233,59 @@ img {
   font-weight: 300;
   line-height: 3.2rem;
 }
+.languages-info {
+  margin-right: 0.5em;
+}
 .border {
   padding: 0 2em;
   border-radius: 3px;
   background-color: var(--white);
   box-shadow: 0px 0px 5px 0px rgb(207, 207, 207);
   margin-right: 1em;
+}
+@media only screen and (max-width: 750px) {
+  .card_detail-container {
+    width: calc(100% - 10vw);
+  }
+  .card_container {
+    margin-top: 5vh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  .card_container-image {
+    margin: 0;
+    width: 90%;
+    height: fit-content;
+  }
+  img {
+    max-width: 90%;
+  }
+  .card_container-details {
+    width: fit-content;
+    max-width: 100%;
+  }
+  .card_container-details-info {
+    flex-direction: column;
+    gap: 4em;
+    width: fit-content;
+  }
+  .card_header {
+    margin-top: 1.25em;
+  }
+  .card_container_details-borders {
+    margin-bottom: 5em;
+  }
+  .languages,
+  .card_container_details-borders {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .border {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 0.5rem;
+  }
 }
 </style>

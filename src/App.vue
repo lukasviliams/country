@@ -64,4 +64,17 @@
 .svg_container {
   padding-right: 5vw;
 }
+@media only screen and (max-width: 575px) {
+  #nav a.router-link-exact-active,
+  #nav a {
+    font-size: 1.4rem;
+  }
+  .svg_container svg {
+    margin-right: 0.5rem;
+  }
+  svg {
+    height: 12px;
+    width: 12px;
+  }
+}
 </style>

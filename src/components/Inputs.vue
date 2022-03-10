@@ -88,6 +88,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   margin-top: 5vh;
+  margin-bottom: 2vh;
 }
 .input_container {
   position: relative;
@@ -157,6 +158,20 @@ select {
 select option {
   color: var(--light-mode-input);
   background-color: var(--white);
+}
+
+@media only screen and (max-width: 575px) {
+  .inputs_container {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 2em;
+  }
+  .input_container {
+    margin-bottom: 2em;
+  }
+  .input-search {
+    width: 100%;
+  }
 }
 
 /* Animations */

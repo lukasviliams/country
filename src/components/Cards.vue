@@ -84,12 +84,12 @@ export default {
   padding-left: 10%;
 }
 .img_container {
-  max-width: 100%;
-  min-width: 100%;
+  width: 100%;
+  height: 16.4rem;
 }
 img {
-  width: 100%;
   height: 100%;
+  width: 100%;
 }
 .card_country-detail {
   font-size: 1.8rem;
