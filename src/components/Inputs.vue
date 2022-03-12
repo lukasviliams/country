@@ -102,6 +102,7 @@ input {
   outline: none;
   border: none;
   font-size: 2rem;
+  color: var(--dark-blue);
 }
 svg {
   transition: all 0.5s ease;

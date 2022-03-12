@@ -15,7 +15,7 @@
           x2="40"
           y2="128"
           fill="none"
-          stroke="#000000"
+          stroke="var(--dark-blue)"
           stroke-linecap="round"
           stroke-linejoin="round"
           stroke-width="16"
@@ -23,7 +23,7 @@
         <polyline
           points="112 56 40 128 112 200"
           fill="none"
-          stroke="#000000"
+          stroke="var(--dark-blue)"
           stroke-linecap="round"
           stroke-linejoin="round"
           stroke-width="16"
@@ -142,7 +142,6 @@ export default {
 </script>
 <style scoped>
 .card_detail-container {
-  width: 100%;
   padding: 0 5vw;
 }
 .svg_container {
@@ -163,6 +162,7 @@ export default {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  color: var(--dark-blue);
 }
 .card_container-image {
   height: 40em;
