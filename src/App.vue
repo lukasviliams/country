@@ -30,9 +30,20 @@
 </template>
 <script>
 import { ref } from "@vue/reactivity";
+import { onBeforeMount } from "@vue/runtime-core";
 export default {
   setup() {
     const darkMode = ref(false);
+    // Store devicepreferences into reference Dark
+    const mediaPreferences = window.matchMedia(
+      "(prefers-color-scheme: dark)"
+    ).matches;
+    // Run function toggleColor in case there is dark media preference
+    onBeforeMount(() => {
+      if (mediaPreferences) {
+        toggleColor();
+      }
+    });
 
     // Switch color modes
     const toggleColor = () => {
@@ -74,7 +85,7 @@ export default {
         );
       }
     };
-    return { darkMode, toggleColor };
+    return { darkMode, mediaPreferences, toggleColor };
   },
 };
 </script>
