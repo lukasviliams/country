@@ -171,7 +171,7 @@ select option {
     margin-bottom: 2em;
   }
   .input-search {
-    width: 100%;
+    width: 95vw;
   }
 }
 
