@@ -168,6 +168,7 @@ select option {
     margin-top: 2em;
   }
   .input_container {
+    width: 100%;
     margin-bottom: 2em;
   }
   .input-search {
